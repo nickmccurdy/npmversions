@@ -1,7 +1,7 @@
-import { Field, Form, Formik } from 'formik'
-import { useState } from 'react'
-import PackageChart from './PackageChart'
-import { fetchVersions, Versions } from './registry'
+import { Field, Form, Formik } from "formik"
+import { useState } from "react"
+import PackageChart from "./PackageChart"
+import { fetchVersions, Versions } from "./registry"
 
 export default function App() {
   const [versions, setVersions] = useState<Versions>()
@@ -9,7 +9,7 @@ export default function App() {
   return (
     <>
       <Formik
-        initialValues={{ name: '' }}
+        initialValues={{ name: "" }}
         onSubmit={async ({ name }) => setVersions(await fetchVersions(name))}
       >
         {({ isSubmitting }) => (

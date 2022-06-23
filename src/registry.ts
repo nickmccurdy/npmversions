@@ -7,7 +7,7 @@ export interface Versions {
 
 export async function fetchVersions(name: string): Promise<Versions> {
   const response = await fetch(
-    `https://api.npmjs.org/versions/${name.replace('/', '%2F')}/last-week`
+    `https://api.npmjs.org/versions/${name.replace("/", "%2F")}/last-week`,
   )
 
   if (response.ok) {

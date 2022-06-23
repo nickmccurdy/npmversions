@@ -4,10 +4,10 @@ import {
   LinearScale,
   LineElement,
   PointElement,
-  Tooltip
-} from 'chart.js'
-import { Line } from 'react-chartjs-2'
-import { Downloads } from './registry'
+  Tooltip,
+} from "chart.js"
+import { Line } from "react-chartjs-2"
+import { Downloads } from "./registry"
 
 Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip)
 
@@ -17,7 +17,7 @@ export default function PackageChart({ downloads }: { downloads: Downloads }) {
       options={{ responsive: true }}
       data={{
         labels: Object.keys(downloads),
-        datasets: [{ data: Object.values(downloads) }]
+        datasets: [{ data: Object.values(downloads) }],
       }}
     />
   )
