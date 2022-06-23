@@ -19,7 +19,7 @@ jobs:
           cache: 'yarn'
       - run: yarn --frozen-lockfile
       - run: yarn build
-      - uses: JamesIves/github-pages-deploy-action@v4.3.3
+      - uses: JamesIves/github-pages-deploy-action@v4
         if: github.ref == 'refs/heads/main'
         with:
           branch: gh-pages # The branch the action should deploy to.
