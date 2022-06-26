@@ -13,11 +13,6 @@ export async function fetchVersions(name: string): Promise<Versions> {
   if (response.ok) {
     return response.json()
   } else {
-    let data
-    try {
-      data = await response.json()
-    } finally {
-      throw new Error(data?.message ?? data?.error ?? response.statusText)
-    }
+    throw new Error(response.statusText)
   }
 }
