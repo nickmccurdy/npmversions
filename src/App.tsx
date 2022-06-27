@@ -24,7 +24,7 @@ export default function App() {
           placeholder="npm package"
           autoFocus
         />
-        <button disabled={submitting}>Submit</button>
+        <button disabled={!name || submitting}>Submit</button>
       </form>
 
       {versions && <PackageChart downloads={versions.downloads} />}
