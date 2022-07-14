@@ -8,11 +8,13 @@ export default defineConfig({
     open: true,
   },
   build: {
-    target: "esnext",
     sourcemap: true,
-  },
-  preview: {
-    open: true,
+    commonjsOptions: {
+      include: [],
+    },
   },
   plugins: [react()],
+  optimizeDeps: {
+    disabled: false,
+  },
 })
