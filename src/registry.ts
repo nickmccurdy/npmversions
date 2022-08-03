@@ -1,3 +1,5 @@
+import { compare } from "semver"
+
 export type Downloads = Record<string, number>
 
 interface Versions {
@@ -11,8 +13,13 @@ export async function fetchDownloads(name: string) {
   )
 
   if (response.ok) {
-    const versions: Versions = await response.json()
-    return versions.downloads
+    const { downloads }: Versions = await response.json()
+    return Object.keys(downloads)
+      .sort(compare)
+      .reduce<Downloads>(
+        (memo, version) => ({ ...memo, [version]: downloads[version] }),
+        {},
+      )
   } else {
     throw new Error(response.statusText)
   }
