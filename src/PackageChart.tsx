@@ -10,6 +10,7 @@ import { Line } from "react-chartjs-2"
 import { Downloads } from "./registry"
 
 Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip)
+Chart.defaults.font.family = "system-ui"
 
 export default function PackageChart({ downloads }: { downloads: Downloads }) {
   return (
