@@ -1,11 +1,11 @@
 import { useState } from "react"
 import PackageChart from "./PackageChart"
-import { fetchVersions, Versions } from "./registry"
+import { Downloads, fetchDownloads } from "./registry"
 
 export default function App() {
   const [name, setName] = useState("")
   const [submitting, setSubmitting] = useState(false)
-  const [versions, setVersions] = useState<Versions>()
+  const [downloads, setDownloads] = useState<Downloads>()
 
   return (
     <>
@@ -13,7 +13,7 @@ export default function App() {
         onSubmit={async (event) => {
           event.preventDefault()
           setSubmitting(true)
-          setVersions(await fetchVersions(name))
+          setDownloads(await fetchDownloads(name))
           setSubmitting(false)
         }}
       >
@@ -27,7 +27,7 @@ export default function App() {
         <button disabled={!name || submitting}>Submit</button>
       </form>
 
-      {versions && <PackageChart downloads={versions.downloads} />}
+      {downloads && <PackageChart downloads={downloads} />}
     </>
   )
 }

@@ -5,13 +5,14 @@ export interface Versions {
   downloads: Downloads
 }
 
-export async function fetchVersions(name: string): Promise<Versions> {
+export async function fetchDownloads(name: string): Promise<Downloads> {
   const response = await fetch(
     `https://api.npmjs.org/versions/${encodeURIComponent(name)}/last-week`,
   )
 
   if (response.ok) {
-    return response.json()
+    const versions: Versions = await response.json()
+    return versions.downloads
   } else {
     throw new Error(response.statusText)
   }
