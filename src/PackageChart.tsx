@@ -15,7 +15,14 @@ export default function PackageChart({ downloads }: { downloads: Downloads }) {
   return (
     <Line
       options={{
-        responsive: true,
+        interaction: {
+          intersect: false,
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
       }}
       data={{
         datasets: [
