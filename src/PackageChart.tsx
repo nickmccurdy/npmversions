@@ -18,10 +18,9 @@ export default function PackageChart({ downloads }: { downloads: Downloads }) {
         responsive: true,
       }}
       data={{
-        labels: Object.keys(downloads),
         datasets: [
           {
-            data: Object.values(downloads),
+            data: Object.entries(downloads).map(([x, y]) => ({ x, y })),
             tension: 0.4,
           },
         ],
