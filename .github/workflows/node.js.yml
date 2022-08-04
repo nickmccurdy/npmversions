@@ -3,7 +3,17 @@ name: Node.js CI
 on: [push, pull_request]
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
 
 jobs:
   format:
@@ -26,17 +36,28 @@ jobs:
       - run: yarn --frozen-lockfile
       - run: yarn tsc
 
-  deploy:
-    needs: [format, type]
-    if: github.ref == 'refs/heads/main'
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           cache: yarn
+      - id: pages
+        uses: actions/configure-pages@v1
       - run: yarn --frozen-lockfile
       - run: yarn build
-      - uses: JamesIves/github-pages-deploy-action@v4
+      - uses: actions/upload-pages-artifact@v1
         with:
-          folder: dist
+          path: ./dist
+
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: [format, type, build]
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v1
