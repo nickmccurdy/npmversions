@@ -13,7 +13,7 @@ test("fetchDownloads with network error", async () => {
       (_req, res, ctx) => res(ctx.status(500)),
     ),
   )
-  expect(() => fetchDownloads("npmversions")).rejects.toThrow(
+  await expect(() => fetchDownloads("npmversions")).rejects.toThrow(
     "Internal Server Error",
   )
 })
