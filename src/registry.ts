@@ -2,7 +2,7 @@ import { compare } from "semver"
 
 export type Downloads = Record<string, number>
 
-interface Versions {
+export interface Versions {
   package: string
   downloads: Downloads
 }
